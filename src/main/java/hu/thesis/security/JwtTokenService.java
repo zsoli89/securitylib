@@ -13,11 +13,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
+@Service
 public class JwtTokenService {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
     private static final String AUTH = "auth";
