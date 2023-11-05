@@ -6,7 +6,7 @@
 
     <groupId>hu.webuni</groupId>
     <artifactId>securitylib</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
     <name>security</name>
     <description>security</description>
 

@@ -42,6 +42,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
         filterChain.doFilter(request, response);
     }
+
     public static UsernamePasswordAuthenticationToken createUserDetailsFromAuthHeader(String authHeader, JwtTokenService jwtService) {
         if(authHeader != null && authHeader.startsWith(BEARER)) {
             String jwtToken = authHeader.substring(BEARER.length());
