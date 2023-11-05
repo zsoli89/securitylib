@@ -29,22 +29,23 @@ public class JwtTokenService {
     private String issuer = "WebshopApp";
     private Algorithm signerAlg;
     private Algorithm validatorAlg;
+    private Algorithm alg = Algorithm.HMAC256("mysecret");
 
     @Value("${hu.webuni.tokenlib.keypaths.private:#{null}}")
     private String pathToPemWithPrivateKey;
     @Value("${hu.webuni.tokenlib.keypaths.public:#{null}}")
     private String pathToPemWithPublicKey;
 
-    @PostConstruct
-    public void init() throws Exception {
-        if(pathToPemWithPrivateKey != null) {
-            signerAlg = Algorithm.ECDSA512(null, (ECPrivateKey) PemUtils.getPrivateKey(pathToPemWithPrivateKey));
-        }
-
-        if(pathToPemWithPublicKey != null) {
-            validatorAlg = Algorithm.ECDSA512((ECPublicKey) PemUtils.getPublicKey(pathToPemWithPublicKey), null);
-        }
-    }
+//    @PostConstruct
+//    public void init() throws Exception {
+//        if(pathToPemWithPrivateKey != null) {
+//            signerAlg = Algorithm.ECDSA512(null, (ECPrivateKey) PemUtils.getPrivateKey(pathToPemWithPrivateKey));
+//        }
+//
+//        if(pathToPemWithPublicKey != null) {
+//            validatorAlg = Algorithm.ECDSA512((ECPublicKey) PemUtils.getPublicKey(pathToPemWithPublicKey), null);
+//        }
+//    }
 
     public String generateAccessToken(UserDetails userDetails) {
         logger.info("Generate new access token for user: {}", userDetails.getUsername());
@@ -56,12 +57,12 @@ public class JwtTokenService {
                 .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(200)))
                 .withIssuer(issuer)
                 .withJWTId(generateUUID())
-                .sign(signerAlg);
+                .sign(alg);
     }
 
     public UserDetails parseJwt(String jwtToken) {
 
-        DecodedJWT decodedJwt = JWT.require(validatorAlg)
+        DecodedJWT decodedJwt = JWT.require(alg)
                 .withIssuer(issuer)
                 .build()
                 .verify(jwtToken);
@@ -81,6 +82,24 @@ public class JwtTokenService {
                 .withIssuer(issuer)
                 .build()
                 .verify(token);
+    }
+
+    public void validateToken(String token) {
+        logger.info("Getting all claims from token.");
+        Map<String, Claim> claims = getAllClaimsFromToken(token).getClaims();
+        List<String> errors = new ArrayList<>();
+
+        if (!claims.get("iss").asString().equals(issuer)) {
+            errors.add("Issuer is not matched");
+        }
+        if (!claims.get("exp").asDate().after((new Date()))) {
+            errors.add("Token is expired");
+        }
+        if (!errors.isEmpty()) {
+            throw new BadCredentialsException(
+                    "Error during validating token {%s}".formatted(errors.toString())
+            );
+        }
     }
 
 }
