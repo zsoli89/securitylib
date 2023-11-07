@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
-//@Service
+@Service
 public class JwtTokenService {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
     private static final String AUTH = "auth";
@@ -51,7 +51,7 @@ public class JwtTokenService {
                 .withSubject(userDetails.getUsername())
                 .withArrayClaim(AUTH, userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new))
                 .withIssuedAt(new Date(System.currentTimeMillis()))
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(10)))
                 .withIssuer(issuer)
                 .withJWTId(generateUUID())
                 .sign(alg);

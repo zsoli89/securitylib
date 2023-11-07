@@ -6,7 +6,7 @@
 
     <groupId>hu.thesis</groupId>
     <artifactId>securitylib</artifactId>
-    <version>0.0.14-SNAPSHOT</version>
+    <version>0.0.16-SNAPSHOT</version>
     <name>securitylib</name>
 
     <properties>
