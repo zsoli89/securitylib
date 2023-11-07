@@ -51,7 +51,7 @@ public class JwtTokenService {
                 .withSubject(userDetails.getUsername())
                 .withArrayClaim(AUTH, userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new))
                 .withIssuedAt(new Date(System.currentTimeMillis()))
-                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(200)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1)))
                 .withIssuer(issuer)
                 .withJWTId(generateUUID())
                 .sign(alg);
