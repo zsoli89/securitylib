@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
-@Service
+//@Service
 public class JwtTokenService {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
     private static final String AUTH = "auth";

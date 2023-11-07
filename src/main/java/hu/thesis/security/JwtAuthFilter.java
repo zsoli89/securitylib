@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private static final String AUTHORIZATION = "Authorization";

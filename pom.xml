@@ -6,7 +6,7 @@
 
     <groupId>hu.thesis</groupId>
     <artifactId>securitylib</artifactId>
-    <version>0.0.11-SNAPSHOT</version>
+    <version>0.0.14-SNAPSHOT</version>
     <name>securitylib</name>
 
     <properties>
@@ -32,20 +32,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${org.mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,9 +62,13 @@
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.70</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>1.70</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -89,21 +79,21 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${org.mapstruct.version}</version>
-                        </path>
+<!--                        <path>-->
+<!--                            <groupId>org.mapstruct</groupId>-->
+<!--                            <artifactId>mapstruct-processor</artifactId>-->
+<!--                            <version>${org.mapstruct.version}</version>-->
+<!--                        </path>-->
                         <!--                        <path>-->
                         <!--                            <groupId>org.projectlombok</groupId>-->
                         <!--                            <artifactId>lombok</artifactId>-->
                         <!--                            <version>${lombok.version}</version>-->
                         <!--                        </path>-->
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
-                        </path>
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok-mapstruct-binding</artifactId>-->
+<!--                            <version>0.2.0</version>-->
+<!--                        </path>-->
                         <!-- other annotation processors -->
 <!--                                                <path>-->
 <!--                                                    <groupId>org.hibernate</groupId>-->
